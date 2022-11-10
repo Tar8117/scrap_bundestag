@@ -25,14 +25,16 @@ with open('persons_url_list.txt') as file:
 
         social_networks = soup.find_all(class_='bt-link-extern')
 
-        social_networks_urls = []
+        social_networks_dict = {}
         for item in social_networks:
-            social_networks_urls.append(item.get('href'))
+            social_networks_name = item.get('title')
+            social_networks_urls = item.get('href')
+            social_networks_dict[social_networks_name] = social_networks_urls
 
         data = {
             'person_name': person_name,
             'company_name': person_company,
-            'social_networks': social_networks_urls
+            'social_networks': social_networks_dict,
         }
         count += 1
         sleep(random.randrange(2, 4))
